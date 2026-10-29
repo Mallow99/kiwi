@@ -68,6 +68,31 @@ Almost every step has a problem.
 **Code says:** the dev deprioritised PvP (stated reason: it drove away newer players on public servers). Bounty, crews and the death tax all still exist.
 **Why it matters for us:** we're building for a private server of friends, not a public one. The "PvP drives off casuals" problem mostly doesn't apply, so we can lean into PvP-adjacent loops (bounty hunting, faction wars, contested bosses) on our own terms.
 
+## W9. There is no endgame
+**Feels like:** at 10,000 doriki there's nothing to do and no reward. It's only fun the first time through, which is why PvP took over.
+**Code says:** 10,000 is a hard cap (`Doriki Limit`). Nothing in the mod is gated on reaching it or rewards anything after it.
+**Why it matters:** a replayable mod needs a long-tail goal. See `docs/plan/phase-6-endgame.md`.
+
+## W10. Challenges aren't fun to fight
+**Feels like:** a screen full of effects; bosses run at you and delete your HP. You either cheese them or die, even at 10,000 doriki.
+**Code says:** boss AI is phase goals plus ability-wrapper goals that fire whenever ready, with no wind-up or recovery windows and no cap on burst damage. Hard bosses spawn at 10,000 doriki.
+**Why it matters:** bosses are the mod's best content. They need to be readable before we put more of them in the world. See `docs/plan/phase-3-combat.md`.
+
+## W11. Conqueror's Haki is a coin flip, then an instant win
+**Feels like:** pre-decided per player; if you have it you win against anyone weaker, and if you don't you lose.
+**Code says:** the default `COMBINED` unlock grants it from a UUID digit check (`HakiHelper.isHaoshokuBorn`), the same on every server. The check uses `& 10` where `% 10` was almost certainly meant, so about 1 in 4 players qualify. Knockout is a pure threshold (`targetHaki/100 + 0.5 < userHaki/100`) with no resistance.
+**Why it matters:** the most iconic power in the setting has no gameplay around it. See tasks 2.6 and 3.6.
+
+## W12. Trainers are hard to find and flaky to use
+**Feels like:** you wait for one to spawn, and half the time the buttons don't work.
+**Code says:** random spawns are 15% every 2 minutes. Trainer buildings always have one, but nothing points players to them. The interaction handler returns `PASS` after opening the dialogue, which is a likely cause of the flaky buttons (needs a repro).
+**Why it matters:** fighting-style progression runs through trainers. See task 2.5.
+
+## W13. Ships and bandit structures aren't worth raiding
+**Feels like:** pirate ships rarely have anything worth it and they're early game; bandit stuff is the same; marine ships have worse odds than bases and you can fall in the ocean with a fruit.
+**Code says:** pirate medium ship captain chest 1.5% golden, large ship treasure 3.8%; bandit fort stash has no golden at all; battleship treasure is actually the best golden odds (10%), but water access is risky for fruit users.
+**Why it matters:** half the world's structures are skippable. See tasks 1.3 and 1.8.
+
 ---
 
 ## Smaller things noticed
