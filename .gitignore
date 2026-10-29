@@ -1,0 +1,3 @@
+.reference/
+*.jar
+__pycache__/
